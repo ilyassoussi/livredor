@@ -1,12 +1,12 @@
 <?php
-require_once './class/upload.php';
+require_once './classs/upload.php';
 if (isset($_POST['ajouter'])) {
 	$image = new upload('image');
 	$image->path();
 }
 
-require 'class/message.php';
-require 'class/savebooks.php';
+require 'classs/message.php';
+require 'classs/savebooks.php';
 $error = null;
 $success = false;
 $saved = new save(__DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'text');
