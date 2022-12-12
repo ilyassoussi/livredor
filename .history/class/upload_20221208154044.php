@@ -1,0 +1,58 @@
+<?php
+
+class upload {
+    private $file;
+
+    public function __construct(string $image)
+    {
+        $this->file = $image;
+        if(!empty($_FILES[$image])){
+            $nameFile = $_FILES[$image]['name'];
+            $typeFile = $_FILES[$image]['type'];
+            $sizeFile = $_FILES[$image]['size'];
+            $tmpFile = $_FILES[$image]['tmp_name'];
+            $errFile = $_FILES[$image]['error'];
+        $extensions = ['png', 'jpg', 'jpeg', 'gif'];
+		// Type d'image 
+		$type = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'];
+		// On récupère
+		$extension = explode('.', $nameFile);
+		// Max size
+		$max_size = 10000000000;
+		
+		// On vérifie que le type est autorisés
+		if(in_array($typeFile, $type))
+		{
+			// On vérifie que il n'y a que deux extensions
+			if(count($extension) <= 2 && in_array(strtolower(end($extension)), $extensions))
+			{
+				// On vérifie le poids de l'image
+				if($sizeFile < $max_size)
+				{
+					// On bouge l'image uploadé dans le dossier upload
+					if(move_uploaded_file($tmpFile, './upload/'.uniqid() . '.' . strtolower(end($extension) ) ) )
+						echo '<center><h8 class="alert alert-success">This picture is uploaded!</h8></center>';
+					else 
+						echo "failed";
+				}
+				else 
+				{
+					echo '<center><h8 class="alert alert-danger">image trop lourd ou format incorrect</center></h8>';
+				}
+			}
+			else 
+			{
+				echo '<center><h8 class="alert alert-danger">Extension de image failed</center></h8>';
+			}
+		}   
+		else 
+		{
+			echo '<center><h8 class="alert alert-danger">image non entree</center></h8>';
+		}
+
+
+	}
+    }
+
+}
+?>
