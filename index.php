@@ -17,12 +17,13 @@ $saved = new save(__DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR .
 		$saved->addmessage($message);
 		$success = true;
 		$_POST = [];
+		$messages = $saved->getmsg(); 
 		}
 		else{
 		$error = $message->geterror();
 			}
     }	
-	$messages = $saved->getmsg(); 
+	
 
 ?>
 <!DOCTYPE html>
