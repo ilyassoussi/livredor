@@ -2,7 +2,6 @@
 require_once './classs/upload.php';
 if (isset($_POST['ajouter'])) {
 	$image = new upload('image');
-	$image->path();
 }
 
 require 'classs/message.php';
@@ -11,7 +10,7 @@ $error = null;
 $success = false;
 $saved = new save(__DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'text');
     if(isset($_POST['titre'] , $_POST['message'])){
-    $message = new message($_POST['titre'], $_POST['message']);
+    	$message = new message($_POST['titre'], $_POST['message']);
 	if($message->IsValid()){		
 
 		$saved->addmessage($message);
@@ -23,7 +22,7 @@ $saved = new save(__DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR .
 		$error = $message->geterror();
 			}
     }	
-	
+
 
 ?>
 <!DOCTYPE html>
@@ -37,11 +36,13 @@ $saved = new save(__DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR .
 <div class="container">
 
 	<form action=""  method="POST" enctype="multipart/form-data">
-		<?php if(!empty($error)) : ?>
-			<div class="alert alert-danger">
+		<?php 
+		if(!empty($error)){
+			echo '<div class="alert alert-danger">
 				Formulaire invalide
-			</div>
-		<?php endif?>
+			</div>';
+		}
+			?>
 		<?php if($success) : ?>
 			<div class="alert alert-success">
 				MERCI !!
