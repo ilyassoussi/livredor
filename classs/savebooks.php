@@ -23,9 +23,9 @@ require_once 'message.php';
         $messages = [];
         foreach ($lines as $line) {
             $data= json_decode($line, true);
-            $messages[] = new Message($data['titre'], $data['message'], new DateTime("@" . $data['date']) );
+            $messages[] = new Message($data['titre'], $data['message'], new DateTime("@" . $data['date']),$data['image']);
         }
-        return array_reverse($messages);
+       return array_reverse($messages);
     }
     
 
