@@ -41,6 +41,7 @@ class Message{
         $this->message = $message;
         $this->date = $date ?: new DateTime;
         $this->image = $image ?: new upload('image');
+        //$this->image = $this->getname();
     }
     public function IsValid() : bool{
         return empty($this->geterror());
@@ -85,6 +86,8 @@ class Message{
             'date' => $this->date->getTimestamp()          
         ]);
     }
+
+
 }
 
 ?>
