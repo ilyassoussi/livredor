@@ -65,6 +65,5 @@ class upload {
 			return './nopicture/images.png';
 		}
 	}
-
 }
 ?>
