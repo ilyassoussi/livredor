@@ -47,7 +47,7 @@ class upload {
 			
 		}
 		if ($tmp[11] == "") {
-			return './nopicture/images.png';
+			return './nopicture/nopicture.png';
 		}
 	}
 }
