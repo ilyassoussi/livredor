@@ -51,10 +51,20 @@ class upload {
 
 	}
 }
-    public function path() : string{
-            $path = $_FILES[$this->file]['name'];
-        return $path;
-        }
+	public function path()
+	{
+		$tab = file('./data/text');
+		$der_ligne = $tab[count($tab) - 1];
+		//echo file_get_contents($der_ligne,FALSE,NULL,2,14);
+		$tmp = explode('"', $der_ligne);
+		if ($tmp[11] != "") {
+			return './upload/' . $_FILES[$this->file]['name'];
+			
+		}
+		if ($tmp[11] == "") {
+			return './nopicture/images.png';
+		}
+	}
 
 }
 ?>
