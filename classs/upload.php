@@ -21,33 +21,14 @@ class upload {
 		$max_size = 1000000;
 		
 		// On vérifie que le type est autorisés
-		if(in_array($typeFile, $type))
-		{
-			// On vérifie que il n'y a que deux extensions
-			if(count($extension) <= 2 && in_array(strtolower(end($extension)), $extensions))
-			{
+			if (in_array($typeFile, $type)) {
 				// On vérifie le poids de l'image
-				if($sizeFile < $max_size)
-				{
+				if ($sizeFile < $max_size) {
 					// On bouge l'image uploadé dans le dossier upload
-					if(move_uploaded_file($tmpFile, './upload/'.$nameFile))
+					if (move_uploaded_file($tmpFile, './upload/' . $nameFile))
 						echo '<center><h8 class="alert alert-success">This picture is uploaded!</h8></center>';
 				}
-				else 
-				{
-					echo '<center><h8 class="alert alert-danger">image trop lourd ou format incorrect</center></h8>';
-				}
 			}
-			/*else 
-			{
-				echo '<center><h8 class="alert alert-danger">Extension de image failed</center></h8>';
-			}*/
-		}   
-		/*else 
-		{
-			echo '<center><h8 class="alert alert-danger"></center></h8>';
-		}*/
-
 
 	}
 }
