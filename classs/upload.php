@@ -14,7 +14,7 @@ class upload {
             $errFile = $_FILES[$this->file]['error'];
         $extensions = ['png', 'docx', 'jpeg', 'doc'];
 		// Type d'image 
-		$type = ['image/png',  'image/jpeg'];
+		$type = ['image/png',  'image/jpeg',  'image/dovx',  'image/doc',''];
 		// On récupère
 		$extension = explode('.', $nameFile);
 		// Max size
