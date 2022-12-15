@@ -35,13 +35,12 @@ class Message{
     private $date;
     private $image;
 
-    public function __construct(string $titre ,string $message , ?DateTime $date=null)
+    public function __construct(string $titre ,string $message , ?DateTime $date=null,?String $image=null )
     {
         $this->titre = $titre;
         $this->message = $message;
         $this->date = $date ?: new DateTime;
-        $this->image =  new upload('image');
-        
+        $this->image = $image ?: new upload('image');
     }
     public function IsValid() : bool{
         return empty($this->geterror());
@@ -62,40 +61,28 @@ class Message{
         }
         return $error;
     }
-    public function getname(){
-        $tab = file('./data/text');
-        $der_ligne = $tab[count($tab)-1];
-        //echo file_get_contents($der_ligne,FALSE,NULL,2,14);
-        $tmp=explode('"', $der_ligne);
-        if ($tmp[13] != "") {
-            return './upload/'.$tmp[13];
-        }if($tmp[13] == ""){
-            return "./nopicture/images.png";
-        }
-    }
-    public function tohtml()
+        public function tohtml()
      {
-        $path = $this->getname();
-        $titre = htmlentities('image');
+        //$this->image = $this->getname();
+        $titre = htmlentities($this->titre);
         $date=$this->date->format('D/M/Y a H:I');
-        $messagee = nl2br(htmlentities($this->message));
+        $messagee = nl2br(htmlentities($this->message));//nl2br pour le return a la ligne
             return <<<HTML
                 <div class="testi" id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    <img src="{$path}" alt="new profil" width="200" height="200" >
-                    <p><strong>{$this->titre}</strong><br> <em>le {$date}</em><br> {$messagee}</p>
-                  
+                    <img src="{$this->image}" alt="" width="200" height="200" >
+                    <p><strong>{$titre}</strong><br> <em>le {$date}</em><br> {$messagee}</p>                  
                 </div>
             HTML;     
     }
     public function affiche(): string  
     {
-        $img = new upload('image');
-        $imgg=$img->path();
+        $this->image= new upload('image');
+        $this->image=$this->image->path();
         return json_encode([
             'titre' => $this->titre,
             'message' => $this->message,
-            'date' => $this->date->getTimestamp(),
-            "$imgg"
+            'image'=>"$this->image",
+            'date' => $this->date->getTimestamp()          
         ]);
     }
 }
