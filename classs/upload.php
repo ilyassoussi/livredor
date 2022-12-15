@@ -29,6 +29,10 @@ class upload {
 						echo '<center><h8 class="alert alert-success">This picture is uploaded!</h8></center>';
 				}
 			}
+			else{
+				$_POST = [];
+				echo '<center><h8 class="alert alert-success">check the type!</h8></center>';
+			}
 
 	}
 }
